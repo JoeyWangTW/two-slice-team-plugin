@@ -77,3 +77,15 @@
   - Action items tagged with `[project-id]` get routed to that project's `docs/inbox.md`
   - The lead agent coordinates teammates and synthesizes their outputs
 ---
+
+## 2026-02-16 - US-006
+- Created /standup skill that spawns one VP per active project for parallel standup reports
+- Files changed:
+  - plugin/skills/standup/SKILL.md
+- **Learnings for future iterations:**
+  - VP spawn prompts include project-specific details: VP_NAME, PROJECT_NAME, PROJECT_PATH
+  - VPs read CLAUDE.md, docs/status.md, docs/worklog.md, docs/inbox.md for standup context
+  - Standup summaries saved to `standups/YYYY-MM-DD.md`
+  - VPs update docs/status.md if user gives direction during standup
+  - Only one team per session — co-founder team must be cleaned up before standup
+---

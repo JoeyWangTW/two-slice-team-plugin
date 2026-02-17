@@ -98,8 +98,8 @@
         "Skill notes that VPs should update docs/status.md with any new direction received from the user during standup"
       ],
       "priority": 6,
-      "passes": false,
-      "notes": "Agent teams required. One team per session limitation means co-founder team must be cleaned up before standup."
+      "passes": true,
+      "notes": "Spawns one VP per active project, synthesizes reports, saves to standups/YYYY-MM-DD.md"
     },
     {
       "id": "US-007",
