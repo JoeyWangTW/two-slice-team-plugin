@@ -1,17 +1,17 @@
-# /project create
+---
+name: project-create
+description: Create a new project with full template structure and register it in the Two Slice Team system.
+argument-hint: "<project-name> [--path /custom/path]"
+disable-model-invocation: true
+---
 
 Create a new project with full template structure and register it in the Two Slice Team system.
 
 ## Usage
 
 ```
-/project create <project-name> [--path /custom/path]
-```
-
-**Examples:**
-```
-/project create my-cool-app
-/project create my-cool-app --path /Users/me/projects/my-cool-app
+/tst:project-create my-cool-app
+/tst:project-create my-cool-app --path /Users/me/projects/my-cool-app
 ```
 
 ## Arguments
@@ -25,13 +25,13 @@ When this skill is triggered, perform the following steps:
 
 ### 0. Load HQ Path
 
-Read `~/.claude/plugins/two-slice-team/config.json` and extract the `hq_path` value. The project registry (`state/projects.json`) is stored at this path.
+Read `~/.config/tst/config.json` and extract the `hq_path` value. The project registry (`state/projects.json`) is stored at this path.
 
-If `config.json` doesn't exist, display: "HQ not configured. Run `/tst setup` to initialize your HQ first."
+If `config.json` doesn't exist, display: "HQ not configured. Run `/tst:setup` to initialize your HQ first."
 
 ### 1. Parse Arguments
 
-Extract the project name from the arguments. If `--path` is provided, use that as the project directory. Otherwise, default to `~/Documents/<project-name>`.
+Extract the project name from `$ARGUMENTS`. If `--path` is provided, use that as the project directory. Otherwise, default to `~/Documents/<project-name>`.
 
 Convert the project name to kebab-case for the project ID (e.g., "My Cool App" becomes "my-cool-app").
 
@@ -65,7 +65,7 @@ Create `CLAUDE.md` in the project root with this content (replace `{{PROJECT_NAM
 
 ## Vision
 
-(Vision not yet defined — use `/project meeting` to set direction)
+(Vision not yet defined — use `/tst:project-meeting` to set direction)
 
 ## Work Documentation
 
@@ -169,7 +169,7 @@ Mark items as `[SEEN]` after reading them.
 
 ## Next Up
 
-- (no tasks yet - use `/project meeting` to plan tasks)
+- (no tasks yet - use `/tst:project-meeting` to plan tasks)
 ```
 
 ### 5. Generate Configuration Files
@@ -238,6 +238,6 @@ Project "<project-name>" created!
   Status: active
 
 Next steps:
-  - Run /project meeting <project-id> to define vision and roadmap
-  - Or start coding and use /standup to check in
+  - Run /tst:project-meeting <project-id> to define vision and roadmap
+  - Or start coding and use /tst:standup to check in
 ```

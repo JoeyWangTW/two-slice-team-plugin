@@ -1,4 +1,9 @@
-# /cofounder
+---
+name: cofounder
+description: Spawn co-founder agent team teammates for ideation, discussion, and research. Use when brainstorming ideas, making strategic decisions, or researching topics.
+argument-hint: "[discuss|research|both]"
+disable-model-invocation: true
+---
 
 Spawn co-founder agent team teammates for ideation, discussion, and research.
 
@@ -9,10 +14,10 @@ Agent Teams must be enabled: `export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
 ## Usage
 
 ```
-/cofounder              # Same as /cofounder both
-/cofounder discuss      # Spawn only the Discussion Partner
-/cofounder research     # Spawn only the Research Partner
-/cofounder both         # Spawn both co-founders
+/tst:cofounder              # Same as /tst:cofounder both
+/tst:cofounder discuss      # Spawn only the Discussion Partner
+/tst:cofounder research     # Spawn only the Research Partner
+/tst:cofounder both         # Spawn both co-founders
 ```
 
 ## Instructions
@@ -21,15 +26,15 @@ When this skill is triggered, you are the **Lead Agent**. You coordinate the co-
 
 ### 0. Load HQ Path
 
-Read `~/.claude/plugins/two-slice-team/config.json` and extract the `hq_path` value. All data files (discussions, state, standups, meetings) are stored at this path.
+Read `~/.config/tst/config.json` and extract the `hq_path` value. All data files (discussions, state, standups, meetings) are stored at this path.
 
-If `config.json` doesn't exist, display: "HQ not configured. Run `/tst setup` to initialize your HQ first."
+If `config.json` doesn't exist, display: "HQ not configured. Run `/tst:setup` to initialize your HQ first."
 
 ### 1. Determine Which Co-Founders to Spawn
 
-- `/cofounder` or `/cofounder both` → Spawn both Co-Founder 1 and Co-Founder 2
-- `/cofounder discuss` → Spawn only Co-Founder 1
-- `/cofounder research` → Spawn only Co-Founder 2
+- `/tst:cofounder` or `/tst:cofounder both` → Spawn both Co-Founder 1 and Co-Founder 2
+- `/tst:cofounder discuss` → Spawn only Co-Founder 1
+- `/tst:cofounder research` → Spawn only Co-Founder 2
 
 ### 2. Spawn Co-Founder 1: Discussion Partner
 

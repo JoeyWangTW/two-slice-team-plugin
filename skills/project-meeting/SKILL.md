@@ -1,4 +1,9 @@
-# /project meeting
+---
+name: project-meeting
+description: Deep planning meeting with a project's VP to clarify vision, set roadmap priorities, and plan work.
+argument-hint: "<project-id>"
+disable-model-invocation: true
+---
 
 Have a deep planning meeting with a project's VP to clarify vision, set roadmap priorities, and plan work.
 
@@ -9,12 +14,7 @@ Agent Teams must be enabled: `export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
 ## Usage
 
 ```
-/project meeting <project-id>
-```
-
-**Example:**
-```
-/project meeting my-cool-app
+/tst:project-meeting my-cool-app
 ```
 
 ## Instructions
@@ -23,15 +23,15 @@ When this skill is triggered, you are the **Lead Agent** facilitating the planni
 
 ### 0. Load HQ Path
 
-Read `~/.claude/plugins/two-slice-team/config.json` and extract the `hq_path` value. All data files (state, discussions, meetings) are stored at this path.
+Read `~/.config/tst/config.json` and extract the `hq_path` value. All data files (state, discussions, meetings) are stored at this path.
 
-If `config.json` doesn't exist, display: "HQ not configured. Run `/tst setup` to initialize your HQ first."
+If `config.json` doesn't exist, display: "HQ not configured. Run `/tst:setup` to initialize your HQ first."
 
 ### 1. Look Up Project
 
 1. Read `{{HQ_PATH}}/state/projects.json`
-2. Find the project with matching `id`
-3. If not found, display: "Project '<project-id>' not found. Run `/project list` to see available projects."
+2. Find the project with matching `id` from `$ARGUMENTS`
+3. If not found, display: "Project '<project-id>' not found. Run `/tst:project-list` to see available projects."
 4. Extract: `name`, `path`, `vp_name`, `vision`
 
 ### 2. Gather Context

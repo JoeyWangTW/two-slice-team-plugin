@@ -29,29 +29,36 @@ Built on Claude Code's **Agent Teams** (experimental). Each co-founder and VP is
 
 ## Prerequisites
 
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) v1.0.33+
 - Agent Teams enabled: `export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
 
 ## Install
 
-Clone this repo and symlink it into your Claude Code plugins directory:
+**Option A: Load directly during development**
+
+```sh
+claude --plugin-dir /path/to/two-slice-team-plugin
+```
+
+**Option B: Test locally from a clone**
 
 ```sh
 git clone https://github.com/JoeyWangTW/two-slice-team-plugin.git
-mkdir -p ~/.claude/plugins
-ln -s "$(pwd)/two-slice-team-plugin/plugin" ~/.claude/plugins/two-slice-team
+claude --plugin-dir ./two-slice-team-plugin
 ```
+
+All skills are namespaced under `tst:` (e.g. `/tst:setup`, `/tst:cofounder`).
 
 ## Setup
 
 Initialize a directory as your HQ (where all data lives):
 
 ```
-/tst setup                    # Use current directory
-/tst setup ~/my-hq            # Use a specific path
+/tst:setup                    # Use current directory
+/tst:setup ~/my-hq            # Use a specific path
 ```
 
-This creates the HQ structure and writes the config so all other commands know where to find it:
+This creates the HQ structure and saves the path to `~/.config/tst/config.json`:
 
 ```
 ~/my-hq/
@@ -65,32 +72,48 @@ This creates the HQ structure and writes the config so all other commands know w
 
 | Command | Description |
 |---------|-------------|
-| `/tst setup [path]` | Initialize a directory as HQ |
-| `/project create <name>` | Create a new project with templates |
-| `/project list` | List all projects |
-| `/project status <id>` | View a project's status |
-| `/project pause <id>` | Pause a project (hide from standups) |
-| `/project resume <id>` | Resume a paused project |
-| `/project meeting <id>` | Deep planning session with a project's VP |
-| `/project work <id>` | Kick off Ralph Loop for autonomous execution |
-| `/cofounder` | Spawn co-founder agents for ideation |
-| `/standup` | Run a standup across all active projects |
+| `/tst:setup [path]` | Initialize a directory as HQ |
+| `/tst:project-create <name>` | Create a new project with templates |
+| `/tst:project-list` | List all projects |
+| `/tst:project-list status <id>` | View a project's status |
+| `/tst:project-list pause <id>` | Pause a project (hide from standups) |
+| `/tst:project-list resume <id>` | Resume a paused project |
+| `/tst:project-meeting <id>` | Deep planning session with a project's VP |
+| `/tst:project-work <id>` | Kick off Ralph Loop for autonomous execution |
+| `/tst:cofounder` | Spawn co-founder agents for ideation |
+| `/tst:standup` | Run a standup across all active projects |
 
 ## Typical Workflow
 
-1. **Set up HQ** — `/tst setup ~/two-slice-hq`
-2. **Brainstorm** — `/cofounder` to discuss an idea with your co-founders
-3. **Create a project** — `/project create my-app`
-4. **Plan it** — `/project meeting my-app` to define vision and user stories with the VP
-5. **Build it** — `/project work my-app` to kick off autonomous execution
-6. **Check in** — `/standup` to get status reports from all VPs
+1. **Set up HQ** — `/tst:setup ~/two-slice-hq`
+2. **Brainstorm** — `/tst:cofounder` to discuss an idea with your co-founders
+3. **Create a project** — `/tst:project-create my-app`
+4. **Plan it** — `/tst:project-meeting my-app` to define vision and user stories with the VP
+5. **Build it** — `/tst:project-work my-app` to kick off autonomous execution
+6. **Check in** — `/tst:standup` to get status reports from all VPs
 
-## Architecture
+## Plugin Structure
+
+```
+two-slice-team-plugin/
+├── .claude-plugin/
+│   └── plugin.json           # Plugin manifest
+├── skills/
+│   ├── setup/SKILL.md        # /tst:setup
+│   ├── cofounder/SKILL.md    # /tst:cofounder
+│   ├── standup/SKILL.md      # /tst:standup
+│   ├── project-create/SKILL.md
+│   ├── project-list/SKILL.md
+│   ├── project-meeting/SKILL.md
+│   └── project-work/SKILL.md
+└── templates/                # Project scaffolding templates
+```
 
 The plugin separates code from data:
 
-- **Plugin** (`~/.claude/plugins/two-slice-team/`) — skills, templates, config
+- **Plugin** (this repo) — skills and templates, installed via Claude Code
 - **HQ** (wherever you set it up) — projects, discussions, standups, meetings
+- **Config** (`~/.config/tst/config.json`) — points to your HQ
 
 This means you can reinstall the plugin without losing data, and your HQ can be git-tracked or synced independently.
 

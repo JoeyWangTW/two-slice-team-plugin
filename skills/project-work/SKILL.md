@@ -1,16 +1,16 @@
-# /project work
+---
+name: project-work
+description: Kick off a Ralph Loop for autonomous execution on a project. Picks up incomplete user stories and implements them.
+argument-hint: "<project-id>"
+disable-model-invocation: true
+---
 
 Prepare and kick off a Ralph Loop for autonomous execution on a project.
 
 ## Usage
 
 ```
-/project work <project-id>
-```
-
-**Example:**
-```
-/project work my-cool-app
+/tst:project-work my-cool-app
 ```
 
 ## Instructions
@@ -19,15 +19,15 @@ When this skill is triggered, perform the following steps:
 
 ### 0. Load HQ Path
 
-Read `~/.claude/plugins/two-slice-team/config.json` and extract the `hq_path` value. The project registry (`state/projects.json`) is stored at this path.
+Read `~/.config/tst/config.json` and extract the `hq_path` value. The project registry (`state/projects.json`) is stored at this path.
 
-If `config.json` doesn't exist, display: "HQ not configured. Run `/tst setup` to initialize your HQ first."
+If `config.json` doesn't exist, display: "HQ not configured. Run `/tst:setup` to initialize your HQ first."
 
 ### 1. Look Up Project
 
 1. Read `{{HQ_PATH}}/state/projects.json`
-2. Find the project with matching `id`
-3. If not found, display: "Project '<project-id>' not found. Run `/project list` to see available projects."
+2. Find the project with matching `id` from `$ARGUMENTS`
+3. If not found, display: "Project '<project-id>' not found. Run `/tst:project-list` to see available projects."
 4. Extract: `name`, `path`
 
 ### 2. Verify Prerequisites
@@ -40,7 +40,7 @@ Change into the project directory and verify the following files exist:
 - If prd.json doesn't exist or has no stories, display:
   ```
   No PRD found (or no incomplete stories) for this project.
-  Run `/project meeting <project-id>` first to plan user stories.
+  Run `/tst:project-meeting <project-id>` first to plan user stories.
   ```
   And stop.
 
@@ -78,7 +78,7 @@ Append an entry to `<project-path>/docs/worklog.md`:
 ```markdown
 ## YYYY-MM-DD - Ralph Loop started
 
-- Initiated autonomous work session via `/project work`
+- Initiated autonomous work session via `/tst:project-work`
 - Stories to complete: <count of stories where passes is false>
 - Starting with: <title of highest priority incomplete story>
 ```
@@ -130,7 +130,7 @@ Ralph Loop finished for <project-name>!
   - [US-003] <title> (priority: 3)
 
 Next steps:
-  - Run `/project work <id>` again to continue
-  - Run `/project status <id>` to see full status
-  - Run `/project meeting <id>` to adjust plans
+  - Run /tst:project-work <id> again to continue
+  - Run /tst:project-list status <id> to see full status
+  - Run /tst:project-meeting <id> to adjust plans
 ```
