@@ -82,8 +82,8 @@
         "Skill includes instruction to route action items tagged with project IDs to those projects' docs/inbox.md files"
       ],
       "priority": 5,
-      "passes": false,
-      "notes": "Agent teams require CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 to be set. The skill should mention this prerequisite."
+      "passes": true,
+      "notes": "Both personas with spawn prompts, discussion saving with YAML frontmatter, and inbox routing for action items"
     },
     {
       "id": "US-006",

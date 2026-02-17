@@ -6,6 +6,8 @@
 - Templates use `{{PLACEHOLDER}}` syntax (PROJECT_NAME, VISION, DATE, CONVENTIONS, ALLOWED_COMMANDS)
 - SKILL.md files are self-contained instruction documents — all content the agent needs must be inline
 - Project entry schema in projects.json: id, name, path, status, vp_name, created_at, vision
+- Agent Teams require `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` — mention in skill prerequisites
+- Action items tagged with `[project-id]` get routed to project `docs/inbox.md`
 
 ---
 
@@ -62,4 +64,16 @@
   - All project management commands read from `~/.claude/plugins/two-slice-team/state/projects.json`
   - Error handling pattern: check if project-id exists, display helpful message if not found
   - Pause/resume toggle the `status` field between "active" and "inactive"
+---
+
+## 2026-02-16 - US-005
+- Created /cofounder skill with Discussion Partner and Research Partner personas
+- Files changed:
+  - plugin/skills/cofounder/SKILL.md
+- **Learnings for future iterations:**
+  - Agent Teams require `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` env var
+  - Teammate spawn prompts must be comprehensive — they define the entire persona and behavior
+  - Discussion summaries saved to `discussions/YYYY-MM-DD-<topic-slug>.md` with YAML frontmatter
+  - Action items tagged with `[project-id]` get routed to that project's `docs/inbox.md`
+  - The lead agent coordinates teammates and synthesizes their outputs
 ---
