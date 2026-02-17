@@ -132,8 +132,8 @@
         "Skill handles the case where no incomplete stories exist in prd.json with a message suggesting /project meeting first"
       ],
       "priority": 8,
-      "passes": false,
-      "notes": "ralph.sh must be executable. The skill should chmod +x if needed."
+      "passes": true,
+      "notes": "Verifies prerequisites, logs work session, runs ralph.sh --tool claude, updates status after completion"
     }
   ]
 }
