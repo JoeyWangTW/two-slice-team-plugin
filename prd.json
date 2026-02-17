@@ -50,8 +50,8 @@
         "SKILL.md includes example usage: /project create my-cool-app --path /Users/me/projects/my-cool-app"
       ],
       "priority": 3,
-      "passes": false,
-      "notes": "This skill must be self-contained — the SKILL.md has all the template content inline since the agent needs to generate the files"
+      "passes": true,
+      "notes": "Self-contained SKILL.md with all template content inline, VP name generation, and projects.json registration"
     },
     {
       "id": "US-004",

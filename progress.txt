@@ -4,6 +4,8 @@
 - plugin.json follows Claude Code plugin spec with name, description, and skills array
 - Each skill has name, description, and path to SKILL.md
 - Templates use `{{PLACEHOLDER}}` syntax (PROJECT_NAME, VISION, DATE, CONVENTIONS, ALLOWED_COMMANDS)
+- SKILL.md files are self-contained instruction documents — all content the agent needs must be inline
+- Project entry schema in projects.json: id, name, path, status, vp_name, created_at, vision
 
 ---
 
@@ -37,4 +39,16 @@
   - CLAUDE.md.template has placeholders: PROJECT_NAME, VISION, CONVENTIONS, ALLOWED_COMMANDS
   - status.md and worklog.md use {{DATE}} placeholder for creation date
   - Templates are self-contained markdown files with consistent heading structure
+---
+
+## 2026-02-16 - US-003
+- Created /project create skill with full inline template content
+- Files changed:
+  - plugin/skills/project-create/SKILL.md
+- **Learnings for future iterations:**
+  - SKILL.md files are self-contained instruction documents for the agent
+  - Skills need inline template content because the agent generates files directly (not copying templates)
+  - Project registration adds entry to state/projects.json with id, name, path, status, vp_name, created_at, vision
+  - VP names follow format "VP [First Name] [Domain Word]"
+  - Project directory structure: CLAUDE.md, prd.json, progress.txt, .claude/settings.json, docs/*, scripts/ralph/
 ---
