@@ -1,0 +1,139 @@
+{
+  "project": "Two Slice Team",
+  "branchName": "ralph/agent-orchestrator-plugin",
+  "description": "Claude Code plugin that orchestrates AI agents across multiple projects using Agent Teams, co-founder personas, VP project managers, and Ralph Loop execution",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Create plugin scaffold and directory structure",
+      "description": "As the user, I need the base plugin directory structure so all other skills and state have a home.",
+      "acceptanceCriteria": [
+        "Create plugin directory at ~/.claude/plugins/two-slice-team/",
+        "Create plugin.json with name 'two-slice-team', description, and skill declarations for: cofounder, standup, project-create, project-list, project-meeting, project-work",
+        "Create state/ directory with an empty projects.json: { \"projects\": [] }",
+        "Create empty directories: discussions/, standups/, meetings/",
+        "Create skills/ directory for SKILL.md files",
+        "Create templates/ directory for project template files",
+        "plugin.json is valid JSON and follows Claude Code plugin spec"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-002",
+      "title": "Create project template files",
+      "description": "As the user, I need standardized template files that get copied into every new project so VPs and Ralph can operate autonomously.",
+      "acceptanceCriteria": [
+        "Create templates/CLAUDE.md.template with: Vision placeholder, Work Documentation section (status updates, work logging, inbox checking instructions), Project Conventions placeholder, Allowed Commands placeholder",
+        "Create templates/status.md with: Last updated, Current state, Recently Completed, In Progress, Up Next, Blockers sections",
+        "Create templates/worklog.md with: header and initial 'Project created' entry placeholder",
+        "Create templates/inbox.md with: instructions for marking items [SEEN] and '(no items yet)' placeholder",
+        "Create templates/roadmap.md with: Vision, Milestones, and Current Focus section placeholders",
+        "Create templates/next-tasks.md with: Prioritized Tasks section and empty list placeholder",
+        "All template files use consistent markdown formatting"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": "These templates live in the plugin's templates/ dir and get copied + customized during /project create"
+    },
+    {
+      "id": "US-003",
+      "title": "Create /project create skill",
+      "description": "As the user, I want a /project create slash command that bootstraps a new project directory with the full template and registers it in projects.json.",
+      "acceptanceCriteria": [
+        "Create skills/project-create/SKILL.md with trigger on '/project create'",
+        "Skill accepts project name as required argument and optional --path flag for custom directory",
+        "Skill instructions tell the agent to: create project directory (default ~/Documents/<name>), copy all templates from templates/ into the project's docs/ dir, generate CLAUDE.md from template with project name and vision, create .claude/settings.json with empty allowedCommands, create scripts/ralph/ directory, create empty prd.json and progress.txt",
+        "Skill instructions tell the agent to: add project entry to state/projects.json with id (kebab-case), name, path, status 'active', vp_name (auto-generated), created_at (ISO date), vision (empty string)",
+        "Skill instructions include the full CLAUDE.md template content inline so agent can generate it",
+        "SKILL.md includes example usage: /project create my-cool-app --path /Users/me/projects/my-cool-app"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": "This skill must be self-contained — the SKILL.md has all the template content inline since the agent needs to generate the files"
+    },
+    {
+      "id": "US-004",
+      "title": "Create /project list and management skill",
+      "description": "As the user, I want slash commands to list projects, view status, and pause/resume projects.",
+      "acceptanceCriteria": [
+        "Create skills/project-list/SKILL.md with triggers on '/project list', '/project status', '/project pause', '/project resume'",
+        "'/project list' reads state/projects.json and displays: name, status (active/inactive), VP name, path, vision summary for each project",
+        "'/project status <project-id>' reads the project's docs/status.md from the path in projects.json and displays it",
+        "'/project pause <project-id>' sets status to 'inactive' in state/projects.json",
+        "'/project resume <project-id>' sets status to 'active' in state/projects.json",
+        "Skill handles case where project-id is not found with clear error message"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-005",
+      "title": "Create /cofounder skill with both personas",
+      "description": "As the user, I want a /cofounder slash command that spawns co-founder agent team teammates for ideation and research.",
+      "acceptanceCriteria": [
+        "Create skills/cofounder/SKILL.md with triggers on '/cofounder', '/cofounder discuss', '/cofounder research', '/cofounder both'",
+        "Skill instructs the lead to spawn Co-Founder 1 (Discussion Partner) as an agent team teammate with spawn prompt: Socratic questioning persona, devil's advocate, structured decision-making, summarize conclusions, ask probing questions",
+        "Skill instructs the lead to spawn Co-Founder 2 (Research/Serendipity) as a teammate with spawn prompt: web research directive, instruction to read files from ~/.claude/plugins/two-slice-team/discussions/ for past context, lateral thinking, surface unexpected connections",
+        "'/cofounder discuss' spawns only Co-Founder 1, '/cofounder research' spawns only Co-Founder 2, '/cofounder both' spawns both",
+        "Skill includes instruction to save discussion summary at session end to discussions/YYYY-MM-DD-<topic>.md with YAML frontmatter (date, participants, topics, related_projects) and body (key points, decisions, action items tagged with project IDs, open questions)",
+        "Skill includes instruction to route action items tagged with project IDs to those projects' docs/inbox.md files"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": "Agent teams require CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 to be set. The skill should mention this prerequisite."
+    },
+    {
+      "id": "US-006",
+      "title": "Create /standup skill for VP standup meetings",
+      "description": "As the user, I want a /standup slash command that spawns one VP teammate per active project to report status in parallel.",
+      "acceptanceCriteria": [
+        "Create skills/standup/SKILL.md with trigger on '/standup'",
+        "Skill instructs the lead to: read state/projects.json, filter to active projects, spawn one agent team teammate per active project",
+        "Each VP teammate spawn prompt includes: VP persona for that project, instruction to cd into the project's path, read docs/status.md and docs/worklog.md and docs/inbox.md, then message the lead with a standup report (done since last standup, planned next, blockers)",
+        "Skill instructs the lead to synthesize all VP reports into a summary and present to the user",
+        "Skill instructs the lead to save standup summary to standups/YYYY-MM-DD.md",
+        "Skill notes that VPs should update docs/status.md with any new direction received from the user during standup"
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": "Agent teams required. One team per session limitation means co-founder team must be cleaned up before standup."
+    },
+    {
+      "id": "US-007",
+      "title": "Create /project meeting skill for deep VP planning",
+      "description": "As the user, I want a /project meeting slash command that spawns a VP for a specific project to do deep planning and roadmap clarification.",
+      "acceptanceCriteria": [
+        "Create skills/project-meeting/SKILL.md with trigger on '/project meeting <project-id>'",
+        "Skill looks up project in state/projects.json to get path and metadata",
+        "Skill instructs the lead to spawn one VP teammate with spawn prompt that includes: full project context instruction (read CLAUDE.md, docs/status.md, docs/worklog.md, docs/roadmap.md), instruction to also read relevant discussion files from discussions/ that mention this project",
+        "VP teammate covers: vision clarification, roadmap priorities, process agreements, documentation standards",
+        "VP generates or updates docs/roadmap.md with milestones and priorities",
+        "VP generates initial prd.json with user stories if the project is new and has no prd.json",
+        "Skill instructs the lead to save meeting notes to meetings/YYYY-MM-DD-<project-id>.md"
+      ],
+      "priority": 7,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-008",
+      "title": "Create /project work skill for Ralph Loop kickoff",
+      "description": "As the user, I want a /project work slash command that prepares and kicks off a Ralph Loop for autonomous execution on a project.",
+      "acceptanceCriteria": [
+        "Create skills/project-work/SKILL.md with trigger on '/project work <project-id>'",
+        "Skill looks up project in state/projects.json to get path",
+        "Skill instructs the agent to: verify prd.json exists in project root with at least one story where passes is false, verify progress.txt exists, verify scripts/ralph/ralph.sh exists (if not, copy from ralph plugin or create it)",
+        "Skill instructs the agent to: log work session start in docs/worklog.md with date and description of what Ralph will work on",
+        "Skill instructs the agent to: run ralph.sh --tool claude from the project directory to start the Ralph Loop",
+        "Skill includes instruction for the agent to update docs/status.md after Ralph completes",
+        "Skill handles the case where no incomplete stories exist in prd.json with a message suggesting /project meeting first"
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": "ralph.sh must be executable. The skill should chmod +x if needed."
+    }
+  ]
+}
