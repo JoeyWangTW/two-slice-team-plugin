@@ -1,0 +1,28 @@
+# {{PROJECT_NAME}}
+
+## Vision
+
+{{VISION}}
+
+## Work Documentation
+
+### Status Updates
+- Read `docs/status.md` at the start of every session to understand current project state
+- Update `docs/status.md` after completing work with what was done and what's next
+
+### Work Logging
+- Append entries to `docs/worklog.md` for every work session
+- Format: `## YYYY-MM-DD - Brief description` followed by bullet points of changes
+
+### Inbox
+- Check `docs/inbox.md` at the start of every session for action items from co-founder discussions or standups
+- Mark items as `[SEEN]` after reading them
+- Address action items in your current work session
+
+## Project Conventions
+
+{{CONVENTIONS}}
+
+## Allowed Commands
+
+{{ALLOWED_COMMANDS}}
