@@ -35,13 +35,20 @@ Built on Claude Code's **Agent Teams** (experimental). Each co-founder and VP is
 
 ## Install
 
-**Option A: Load directly during development**
+**Option A: Marketplace (recommended)**
+
+```sh
+/plugin marketplace add JoeyWangTW/two-slice-team-plugin
+/plugin install tst@two-slice-team
+```
+
+**Option B: Load directly during development**
 
 ```sh
 claude --plugin-dir /path/to/two-slice-team-plugin
 ```
 
-**Option B: Test locally from a clone**
+**Option C: From a clone**
 
 ```sh
 git clone https://github.com/JoeyWangTW/two-slice-team-plugin.git
@@ -100,7 +107,8 @@ This creates the HQ structure and saves the path to `~/.config/tst/config.json`:
 ```
 two-slice-team-plugin/
 ├── .claude-plugin/
-│   └── plugin.json           # Plugin manifest
+│   ├── plugin.json           # Plugin manifest
+│   └── marketplace.json      # Marketplace catalog
 ├── skills/
 │   ├── setup/SKILL.md        # /tst:setup
 │   ├── cofounder/SKILL.md    # /tst:cofounder

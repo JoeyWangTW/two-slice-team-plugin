@@ -1,0 +1,25 @@
+{
+  "name": "two-slice-team",
+  "owner": {
+    "name": "Joey Wang",
+    "email": "joeywang@hey.com"
+  },
+  "metadata": {
+    "description": "AI operations team plugin for Claude Code — co-founders for ideation and research, VPs for project execution across any work type."
+  },
+  "plugins": [
+    {
+      "name": "tst",
+      "source": "./",
+      "description": "Two Slice Team — co-founder agents for ideation and research, VP agents for project execution across any work type, and Ralph Loop for autonomous code execution.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Joey Wang"
+      },
+      "repository": "https://github.com/JoeyWangTW/two-slice-team-plugin",
+      "license": "MIT",
+      "keywords": ["agent-teams", "project-management", "orchestration", "ralph-loop", "research"],
+      "category": "productivity"
+    }
+  ]
+}
