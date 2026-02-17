@@ -18,9 +18,15 @@ Agent Teams must be enabled: `export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
 
 When this skill is triggered, you are the **Lead Agent** coordinating the standup.
 
+### 0. Load HQ Path
+
+Read `~/.claude/plugins/two-slice-team/config.json` and extract the `hq_path` value. All data files (state, standups) are stored at this path.
+
+If `config.json` doesn't exist, display: "HQ not configured. Run `/tst setup` to initialize your HQ first."
+
 ### 1. Load Active Projects
 
-1. Read `~/.claude/plugins/two-slice-team/state/projects.json`
+1. Read `{{HQ_PATH}}/state/projects.json`
 2. Filter to projects where `status` is `"active"`
 3. If no active projects, display: "No active projects. Use `/project create <name>` to create one."
 
@@ -86,7 +92,7 @@ If the user provides direction during standup:
 
 ### 5. Save Standup Summary
 
-Save the standup summary to `~/.claude/plugins/two-slice-team/standups/YYYY-MM-DD.md`:
+Save the standup summary to `{{HQ_PATH}}/standups/YYYY-MM-DD.md`:
 
 ```markdown
 # Standup — YYYY-MM-DD

@@ -13,9 +13,15 @@ Manage and view Two Slice Team projects.
 
 ## Instructions
 
+### 0. Load HQ Path
+
+Read `~/.claude/plugins/two-slice-team/config.json` and extract the `hq_path` value. The project registry (`state/projects.json`) is stored at this path.
+
+If `config.json` doesn't exist, display: "HQ not configured. Run `/tst setup` to initialize your HQ first."
+
 ### /project list
 
-1. Read `~/.claude/plugins/two-slice-team/state/projects.json`
+1. Read `{{HQ_PATH}}/state/projects.json`
 2. For each project in the `projects` array, display a table or formatted list with:
    - **Name**: The project name
    - **Status**: `active` or `inactive`
@@ -36,7 +42,7 @@ Manage and view Two Slice Team projects.
 
 ### /project status <project-id>
 
-1. Read `~/.claude/plugins/two-slice-team/state/projects.json`
+1. Read `{{HQ_PATH}}/state/projects.json`
 2. Find the project with matching `id`
 3. If not found, display: "Project '<project-id>' not found. Run `/project list` to see available projects."
 4. If found, read the project's `docs/status.md` file from the project's `path`
@@ -46,18 +52,18 @@ Manage and view Two Slice Team projects.
 
 ### /project pause <project-id>
 
-1. Read `~/.claude/plugins/two-slice-team/state/projects.json`
+1. Read `{{HQ_PATH}}/state/projects.json`
 2. Find the project with matching `id`
 3. If not found, display: "Project '<project-id>' not found. Run `/project list` to see available projects."
 4. If found, set the project's `status` to `"inactive"`
-5. Write the updated JSON back to `state/projects.json`
+5. Write the updated JSON back to `{{HQ_PATH}}/state/projects.json`
 6. Display: "Project '<name>' paused. It won't appear in standups. Use `/project resume <id>` to reactivate."
 
 ### /project resume <project-id>
 
-1. Read `~/.claude/plugins/two-slice-team/state/projects.json`
+1. Read `{{HQ_PATH}}/state/projects.json`
 2. Find the project with matching `id`
 3. If not found, display: "Project '<project-id>' not found. Run `/project list` to see available projects."
 4. If found, set the project's `status` to `"active"`
-5. Write the updated JSON back to `state/projects.json`
+5. Write the updated JSON back to `{{HQ_PATH}}/state/projects.json`
 6. Display: "Project '<name>' resumed! It will now appear in standups."

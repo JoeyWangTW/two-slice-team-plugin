@@ -19,6 +19,12 @@ Agent Teams must be enabled: `export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
 
 When this skill is triggered, you are the **Lead Agent**. You coordinate the co-founder team.
 
+### 0. Load HQ Path
+
+Read `~/.claude/plugins/two-slice-team/config.json` and extract the `hq_path` value. All data files (discussions, state, standups, meetings) are stored at this path.
+
+If `config.json` doesn't exist, display: "HQ not configured. Run `/tst setup` to initialize your HQ first."
+
 ### 1. Determine Which Co-Founders to Spawn
 
 - `/cofounder` or `/cofounder both` → Spawn both Co-Founder 1 and Co-Founder 2
@@ -65,7 +71,7 @@ When the conversation is wrapping up, message the lead with:
 
 ### 3. Spawn Co-Founder 2: Research & Serendipity Partner
 
-Spawn a teammate with this prompt:
+Spawn a teammate with this prompt (replace `{{HQ_PATH}}` with the actual hq_path from config.json):
 
 ```
 You are Co-Founder 2: The Research & Serendipity Partner.
@@ -80,7 +86,7 @@ Your role is to bring outside knowledge, research, and unexpected connections to
 - You ground ideas in real-world examples and data
 
 ## How You Operate
-1. Read past discussion files from ~/.claude/plugins/two-slice-team/discussions/ for context on previous conversations
+1. Read past discussion files from {{HQ_PATH}}/discussions/ for context on previous conversations
 2. Listen to the current topic or question
 3. Use web search to find relevant information, examples, competitors, research
 4. Surface connections to past discussions or other projects
@@ -90,8 +96,8 @@ Your role is to bring outside knowledge, research, and unexpected connections to
 - Search for current best practices and trends related to the topic
 - Look for competitors or similar products and what they do well
 - Find relevant research, blog posts, or case studies
-- Check if any past discussions in discussions/ are relevant
-- Read state/projects.json to understand existing projects and find cross-project connections
+- Check if any past discussions in {{HQ_PATH}}/discussions/ are relevant
+- Read {{HQ_PATH}}/state/projects.json to understand existing projects and find cross-project connections
 
 ## Conversation Style
 - Share findings with context: "I found that X company does Y because Z..."
@@ -118,7 +124,7 @@ As the lead agent:
 ### 5. Save Discussion Summary
 
 When the session is ending, create a discussion summary file at:
-`~/.claude/plugins/two-slice-team/discussions/YYYY-MM-DD-<topic-slug>.md`
+`{{HQ_PATH}}/discussions/YYYY-MM-DD-<topic-slug>.md`
 
 Where `<topic-slug>` is a short kebab-case description of the main topic discussed.
 
@@ -167,7 +173,7 @@ related_projects:
 After saving the discussion summary, check the action items for project ID tags.
 
 For each action item tagged with a project ID (e.g., `[my-cool-app]`):
-1. Look up the project in `~/.claude/plugins/two-slice-team/state/projects.json` to get its path
+1. Look up the project in `{{HQ_PATH}}/state/projects.json` to get its path
 2. Append the action item to that project's `docs/inbox.md` file in this format:
 
 ```markdown

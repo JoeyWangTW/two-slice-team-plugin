@@ -18,7 +18,33 @@ The plugin is manual-first: all interactions are triggered via slash commands. A
 - Keep everything within the Claude Code plugin ecosystem (skills, hooks, CLAUDE.md)
 - Maintain a clean communication channel between the management layer and each project via a standardized project template
 
-## Architecture: Agent Teams
+## Architecture
+
+### Code vs Data Separation
+
+The plugin separates **code** (skills, templates) from **data** (discussions, standups, projects). The data directory ("HQ") is configurable and can live anywhere on disk.
+
+```
+~/.claude/plugins/two-slice-team/        <-- PLUGIN (code, installed)
+├── plugin.json                           # Skill declarations
+├── config.json                           # { "hq_path": "/path/to/hq" }
+├── skills/                               # SKILL.md files
+└── templates/                            # Project templates
+
+/path/to/hq/                             <-- HQ (data, configurable)
+├── state/projects.json                   # Central project registry
+├── discussions/                          # Co-founder session docs
+├── standups/                             # Standup summaries
+├── meetings/                             # Meeting notes
+└── tasks/                                # PRDs and planning docs
+```
+
+Every skill reads `config.json` first to get `hq_path`, then reads/writes data from there. This means:
+- Plugin can be reinstalled without losing data
+- HQ can be git-tracked independently
+- HQ can live anywhere (~/Documents, ~/Projects, a synced folder, etc.)
+
+### Agent Teams
 
 The orchestrator uses Claude Code Agent Teams as the runtime layer. This is critical — it means each agent gets its own context window, they message each other directly, and nothing overflows.
 
@@ -330,7 +356,8 @@ Append-only log of all work sessions on this project.
 
 - **Agent Teams (experimental):** Requires `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`. Has known limitations: no session resumption for in-process teammates, one team per session, no nested teams. The lead session cannot be transferred.
 - **Display mode:** Recommend `tmux` split panes for standup visibility. Fall back to in-process mode with Shift+Up/Down navigation.
-- **State management:** All state is file-based. `state/projects.json` for registry, markdown files for discussions/standups/meetings. Each project's state lives in its own `docs/` directory.
+- **Code/data separation:** Plugin code (skills, templates, plugin.json) lives at `~/.claude/plugins/two-slice-team/`. All data (projects.json, discussions, standups, meetings) lives at the configurable HQ path stored in `config.json`. Every skill reads `config.json` as step 0.
+- **State management:** All state is file-based. `{HQ}/state/projects.json` for registry, markdown files for discussions/standups/meetings at the HQ path. Each project's state lives in its own `docs/` directory.
 - **Ralph integration:** Each project gets `scripts/ralph/ralph.sh` copied from the installed ralph plugin. Ralph reads `prd.json` for stories, writes to `progress.txt`, makes git commits. The VP is responsible for ensuring `prd.json` has valid incomplete stories before kicking off Ralph.
 - **Context window management:** No longer a concern at the orchestrator level — each teammate has its own context. The project template's `CLAUDE.md` keeps individual agent context focused.
 - **Skill isolation:** Each slash command maps to one SKILL.md. Skills are stateless — they read from and write to the filesystem, then spawn agent teams as needed.

@@ -21,16 +21,22 @@ Agent Teams must be enabled: `export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
 
 When this skill is triggered, you are the **Lead Agent** facilitating the planning meeting.
 
+### 0. Load HQ Path
+
+Read `~/.claude/plugins/two-slice-team/config.json` and extract the `hq_path` value. All data files (state, discussions, meetings) are stored at this path.
+
+If `config.json` doesn't exist, display: "HQ not configured. Run `/tst setup` to initialize your HQ first."
+
 ### 1. Look Up Project
 
-1. Read `~/.claude/plugins/two-slice-team/state/projects.json`
+1. Read `{{HQ_PATH}}/state/projects.json`
 2. Find the project with matching `id`
 3. If not found, display: "Project '<project-id>' not found. Run `/project list` to see available projects."
 4. Extract: `name`, `path`, `vp_name`, `vision`
 
 ### 2. Gather Context
 
-Before spawning the VP, read the following files from `~/.claude/plugins/two-slice-team/discussions/` to find any discussions that mention this project:
+Before spawning the VP, read files from `{{HQ_PATH}}/discussions/` to find any discussions that mention this project:
 - Look for files where the YAML frontmatter `related_projects` includes this project's ID
 - Note any relevant action items, decisions, or open questions from past discussions
 
@@ -115,7 +121,7 @@ If the project has no `prd.json` or the existing one has an empty `userStories` 
 }
 
 ### 5. Update Project Vision
-If the vision was clarified during the meeting, update the `vision` field in `~/.claude/plugins/two-slice-team/state/projects.json` for this project.
+If the vision was clarified during the meeting, update the `vision` field in {{HQ_PATH}}/state/projects.json for this project.
 
 ### 6. Report to Lead
 Message the lead with:
@@ -136,7 +142,7 @@ As the lead agent:
 
 ### 5. Save Meeting Notes
 
-After the meeting, save notes to `~/.claude/plugins/two-slice-team/meetings/YYYY-MM-DD-<project-id>.md`:
+After the meeting, save notes to `{{HQ_PATH}}/meetings/YYYY-MM-DD-<project-id>.md`:
 
 ```markdown
 # Project Meeting: {{PROJECT_NAME}} — YYYY-MM-DD

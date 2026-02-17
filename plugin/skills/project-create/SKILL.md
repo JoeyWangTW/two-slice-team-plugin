@@ -23,6 +23,12 @@ Create a new project with full template structure and register it in the Two Sli
 
 When this skill is triggered, perform the following steps:
 
+### 0. Load HQ Path
+
+Read `~/.claude/plugins/two-slice-team/config.json` and extract the `hq_path` value. The project registry (`state/projects.json`) is stored at this path.
+
+If `config.json` doesn't exist, display: "HQ not configured. Run `/tst setup` to initialize your HQ first."
+
 ### 1. Parse Arguments
 
 Extract the project name from the arguments. If `--path` is provided, use that as the project directory. Otherwise, default to `~/Documents/<project-name>`.
@@ -203,7 +209,7 @@ Format: "VP [First Name] [Domain Word]"
 
 ### 7. Register in projects.json
 
-Read `~/.claude/plugins/two-slice-team/state/projects.json` and add a new entry:
+Read `{{HQ_PATH}}/state/projects.json` and add a new entry:
 
 ```json
 {

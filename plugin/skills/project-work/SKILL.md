@@ -17,9 +17,15 @@ Prepare and kick off a Ralph Loop for autonomous execution on a project.
 
 When this skill is triggered, perform the following steps:
 
+### 0. Load HQ Path
+
+Read `~/.claude/plugins/two-slice-team/config.json` and extract the `hq_path` value. The project registry (`state/projects.json`) is stored at this path.
+
+If `config.json` doesn't exist, display: "HQ not configured. Run `/tst setup` to initialize your HQ first."
+
 ### 1. Look Up Project
 
-1. Read `~/.claude/plugins/two-slice-team/state/projects.json`
+1. Read `{{HQ_PATH}}/state/projects.json`
 2. Find the project with matching `id`
 3. If not found, display: "Project '<project-id>' not found. Run `/project list` to see available projects."
 4. Extract: `name`, `path`
