@@ -89,3 +89,15 @@
   - VPs update docs/status.md if user gives direction during standup
   - Only one team per session — co-founder team must be cleaned up before standup
 ---
+
+## 2026-02-16 - US-007
+- Created /project meeting skill for deep VP planning sessions
+- Files changed:
+  - plugin/skills/project-meeting/SKILL.md
+- **Learnings for future iterations:**
+  - Meeting skill gathers discussion context before spawning VP (reads discussions/ for related files)
+  - VP covers: vision, roadmap, process, documentation standards
+  - VP generates/updates docs/roadmap.md and prd.json
+  - VP can update vision in state/projects.json
+  - Meeting notes saved to `meetings/YYYY-MM-DD-<project-id>.md`
+---
