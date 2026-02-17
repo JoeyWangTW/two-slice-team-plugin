@@ -66,8 +66,8 @@
         "Skill handles case where project-id is not found with clear error message"
       ],
       "priority": 4,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Handles list, status, pause, resume with error handling for not-found projects"
     },
     {
       "id": "US-005",
