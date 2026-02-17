@@ -31,6 +31,7 @@ Built on Claude Code's **Agent Teams** (experimental). Each co-founder and VP is
 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) v1.0.33+
 - Agent Teams enabled: `export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
+- [Ralph Loop](https://github.com/snarktank/ralph) installed (for autonomous execution via `/tst:project-work`)
 
 ## Install
 
