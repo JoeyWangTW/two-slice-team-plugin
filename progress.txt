@@ -1,0 +1,23 @@
+## Codebase Patterns
+- Plugin source lives in `plugin/` dir in repo root, symlinked to `~/.claude/plugins/two-slice-team/`
+- Empty directories need `.gitkeep` files to be tracked by git
+- plugin.json follows Claude Code plugin spec with name, description, and skills array
+- Each skill has name, description, and path to SKILL.md
+
+---
+
+## 2026-02-16 - US-001
+- Created plugin scaffold and directory structure
+- Files changed:
+  - plugin/plugin.json (skill declarations for all 6 skills)
+  - plugin/state/projects.json (empty projects array)
+  - plugin/discussions/.gitkeep
+  - plugin/standups/.gitkeep
+  - plugin/meetings/.gitkeep
+  - plugin/skills/.gitkeep
+  - plugin/templates/.gitkeep
+- **Learnings for future iterations:**
+  - Plugin source lives in repo at `plugin/`, symlinked to `~/.claude/plugins/two-slice-team/`
+  - All 6 skills declared in plugin.json: cofounder, standup, project-create, project-list, project-meeting, project-work
+  - State directory holds projects.json which tracks all registered projects
+---
