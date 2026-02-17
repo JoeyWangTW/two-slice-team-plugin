@@ -66,7 +66,8 @@ This creates the HQ structure and saves the path to `~/.config/tst/config.json`:
 ├── state/projects.json       # Project registry
 ├── discussions/              # Co-founder session notes
 ├── standups/                 # Daily standup summaries
-└── meetings/                 # Project meeting notes
+├── meetings/                 # Project meeting notes
+└── research/                 # Co-founder research results
 ```
 
 ## Commands
@@ -82,6 +83,7 @@ This creates the HQ structure and saves the path to `~/.config/tst/config.json`:
 | `/tst:project-meeting <id>` | Deep planning session with a project's VP |
 | `/tst:project-work <id>` | Kick off Ralph Loop for autonomous execution |
 | `/tst:cofounder` | Spawn co-founder agents for ideation |
+| `/tst:cofounder-research <topic>` | Research a topic asynchronously |
 | `/tst:standup` | Run a standup across all active projects |
 
 ## Typical Workflow
@@ -90,7 +92,7 @@ This creates the HQ structure and saves the path to `~/.config/tst/config.json`:
 2. **Brainstorm** — `/tst:cofounder` to discuss an idea with your co-founders
 3. **Create a project** — `/tst:project-create my-app`
 4. **Plan it** — `/tst:project-meeting my-app` to define vision and user stories with the VP
-5. **Build it** — `/tst:project-work my-app` to kick off autonomous execution
+5. **Execute** — `/tst:project-work my-app` to kick off autonomous execution (Ralph Loop for code, VP-guided for other work)
 6. **Check in** — `/tst:standup` to get status reports from all VPs
 
 ## Plugin Structure
@@ -102,6 +104,7 @@ two-slice-team-plugin/
 ├── skills/
 │   ├── setup/SKILL.md        # /tst:setup
 │   ├── cofounder/SKILL.md    # /tst:cofounder
+│   ├── cofounder-research/SKILL.md  # /tst:cofounder-research
 │   ├── standup/SKILL.md      # /tst:standup
 │   ├── project-create/SKILL.md
 │   ├── project-list/SKILL.md

@@ -153,10 +153,10 @@ Mark items as `[SEEN]` after reading them.
 
 ## Milestones
 
-### Milestone 1: MVP
-- [ ] Define core features
-- [ ] Build initial prototype
-- [ ] Get first user feedback
+### Milestone 1: First Deliverable
+- [ ] Define scope
+- [ ] Complete initial version
+- [ ] Get first feedback
 
 ## Current Focus
 
@@ -204,6 +204,8 @@ Generate a VP name for this project. Use a creative, memorable name that relates
 - For a search project: "VP Sierra Search"
 - For a payments project: "VP Parker Payments"
 - For a chat app: "VP Charlie Chat"
+- For a bakery business: "VP Betty Bakes"
+- For a research project: "VP Reese Research"
 
 Format: "VP [First Name] [Domain Word]"
 
@@ -239,5 +241,5 @@ Project "<project-name>" created!
 
 Next steps:
   - Run /tst:project-meeting <project-id> to define vision and roadmap
-  - Or start coding and use /tst:standup to check in
+  - Or start working and use /tst:standup to check in
 ```

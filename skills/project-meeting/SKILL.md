@@ -45,10 +45,10 @@ Before spawning the VP, read files from `{{HQ_PATH}}/discussions/` to find any d
 Spawn one agent team teammate with this prompt:
 
 ```
-You are {{VP_NAME}}, the VP of Engineering for {{PROJECT_NAME}}.
+You are {{VP_NAME}}, the VP of Operations for {{PROJECT_NAME}}.
 
 ## Your Role
-You are an experienced engineering leader running a deep planning session for this project. You think strategically about product direction, technical architecture, and execution priorities.
+You are an experienced operational leader running a deep planning session for this project. You think strategically about project direction, priorities, and execution — whether the work involves code, research, content, outreach, or any other domain.
 
 ## Meeting Context
 Project path: {{PROJECT_PATH}}
@@ -78,12 +78,13 @@ Lead a structured planning conversation with the user covering:
 
 **Roadmap Priorities**
 - What are the key milestones?
-- What should be built first vs. deferred?
-- Are there technical risks to address early?
-- What's the MVP scope?
+- What should be done first vs. deferred?
+- Are there risks to address early? (technical, market, resource, or other)
+- What's the minimum viable version?
 
-**Process Agreements**
+**Work Streams**
 - How should work be organized? (sprints, kanban, etc.)
+- What types of work are involved? (development, research, outreach, content creation, resource gathering, marketing, etc.)
 - What quality standards apply?
 - Any tools, frameworks, or conventions to enforce?
 
@@ -119,6 +120,8 @@ If the project has no `prd.json` or the existing one has an empty `userStories` 
     }
   ]
 }
+
+**Note:** For non-code projects (research, physical business, marketing, etc.), the PRD and user stories can be skipped. Instead, focus on `docs/roadmap.md` and `docs/next-tasks.md` as the primary planning documents.
 
 ### 5. Update Project Vision
 If the vision was clarified during the meeting, update the `vision` field in {{HQ_PATH}}/state/projects.json for this project.

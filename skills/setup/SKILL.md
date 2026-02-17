@@ -34,7 +34,8 @@ Create the following directories and files at the HQ path:
 │   └── projects.json
 ├── discussions/
 ├── standups/
-└── meetings/
+├── meetings/
+└── research/
 ```
 
 **state/projects.json** (empty project registry):
@@ -44,7 +45,7 @@ Create the following directories and files at the HQ path:
 }
 ```
 
-Create the `discussions/`, `standups/`, and `meetings/` directories (they start empty).
+Create the `discussions/`, `standups/`, `meetings/`, and `research/` directories (they start empty).
 
 ### 3. Write Config
 
@@ -77,8 +78,10 @@ Two Slice Team HQ initialized!
     - discussions/
     - standups/
     - meetings/
+    - research/
 
 Next steps:
-  - /tst:project-create <name>    Create your first project
-  - /tst:cofounder                Start a co-founder discussion
+  - /tst:project-create <name>         Create your first project
+  - /tst:cofounder                     Start a co-founder discussion
+  - /tst:cofounder-research <topic>    Research a topic asynchronously
 ```

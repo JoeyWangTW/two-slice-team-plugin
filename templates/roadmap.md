@@ -6,10 +6,10 @@
 
 ## Milestones
 
-### Milestone 1: MVP
-- [ ] Define core features
-- [ ] Build initial prototype
-- [ ] Get first user feedback
+### Milestone 1: First Deliverable
+- [ ] Define scope
+- [ ] Complete initial version
+- [ ] Get first feedback
 
 ## Current Focus
 

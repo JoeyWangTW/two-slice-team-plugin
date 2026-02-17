@@ -1,11 +1,11 @@
 ---
 name: project-work
-description: Kick off a Ralph Loop for autonomous execution on a project. Picks up incomplete user stories and implements them.
+description: Start a work session on a project. Uses Ralph Loop for code projects with user stories, or a VP-guided session for general work.
 argument-hint: "<project-id>"
 disable-model-invocation: true
 ---
 
-Prepare and kick off a Ralph Loop for autonomous execution on a project.
+Start a work session on a project. Automatically detects whether to use Ralph Loop (code projects with user stories) or a VP-guided session (general work).
 
 ## Usage
 
@@ -30,19 +30,20 @@ If `config.json` doesn't exist, display: "HQ not configured. Run `/tst:setup` to
 3. If not found, display: "Project '<project-id>' not found. Run `/tst:project-list` to see available projects."
 4. Extract: `name`, `path`
 
-### 2. Verify Prerequisites
+### 2. Determine Work Mode
 
-Change into the project directory and verify the following files exist:
+Change into the project directory and check which work mode to use:
 
-**prd.json:**
-- Check that `<project-path>/prd.json` exists
-- Check that it contains at least one user story where `passes` is `false`
-- If prd.json doesn't exist or has no stories, display:
-  ```
-  No PRD found (or no incomplete stories) for this project.
-  Run `/tst:project-meeting <project-id>` first to plan user stories.
-  ```
-  And stop.
+- **Code Mode (Ralph Loop):** If `<project-path>/prd.json` exists AND contains at least one user story where `passes` is `false` → proceed to **Step 3A**
+- **General Mode (VP Work Session):** If `prd.json` does not exist, or has an empty `userStories` array, or all stories have `passes: true` → proceed to **Step 3B**
+
+---
+
+### 3A. Code Mode — Ralph Loop
+
+This path handles code projects with incomplete user stories.
+
+#### 3A.1 Verify Prerequisites
 
 **progress.txt:**
 - Check that `<project-path>/progress.txt` exists
@@ -71,7 +72,7 @@ Change into the project directory and verify the following files exist:
   8. Update the PRD and progress log
   9. Reply with `<promise>COMPLETE</promise>` when all stories pass
 
-### 3. Log Work Session Start
+#### 3A.2 Log Work Session Start
 
 Append an entry to `<project-path>/docs/worklog.md`:
 
@@ -83,7 +84,7 @@ Append an entry to `<project-path>/docs/worklog.md`:
 - Starting with: <title of highest priority incomplete story>
 ```
 
-### 4. Start Ralph Loop
+#### 3A.3 Start Ralph Loop
 
 Run the Ralph Loop from the project directory:
 
@@ -93,7 +94,7 @@ cd <project-path> && scripts/ralph/ralph.sh --tool claude
 
 **Important:** The ralph.sh script runs iteratively — each iteration picks up the next incomplete story. Let it run until it completes or reaches max iterations.
 
-### 5. Post-Completion Update
+#### 3A.4 Post-Completion Update
 
 After Ralph finishes (or reaches max iterations):
 
@@ -112,7 +113,7 @@ After Ralph finishes (or reaches max iterations):
    - Result: <completed all / reached max iterations>
    ```
 
-### 6. Report to User
+#### 3A.5 Report to User
 
 Display a summary:
 
@@ -128,6 +129,106 @@ Ralph Loop finished for <project-name>!
 
   Remaining stories:
   - [US-003] <title> (priority: 3)
+
+Next steps:
+  - Run /tst:project-work <id> again to continue
+  - Run /tst:project-list status <id> to see full status
+  - Run /tst:project-meeting <id> to adjust plans
+```
+
+---
+
+### 3B. General Mode — VP Work Session
+
+This path handles any project type — research, physical business, marketing, content, social experiments, etc.
+
+#### 3B.1 Load Project Context
+
+Read the project's VP name from `{{HQ_PATH}}/state/projects.json`.
+
+Read the following files from the project directory:
+- `CLAUDE.md` (project overview)
+- `docs/status.md` (current status)
+- `docs/roadmap.md` (roadmap and milestones)
+- `docs/next-tasks.md` (prioritized task list)
+- `docs/inbox.md` (pending action items)
+- `docs/worklog.md` (recent work history)
+
+#### 3B.2 Log Work Session Start
+
+Append an entry to `<project-path>/docs/worklog.md`:
+
+```markdown
+## YYYY-MM-DD - VP work session started
+
+- Initiated work session via `/tst:project-work`
+- Mode: General (VP-guided)
+```
+
+#### 3B.3 Identify Work Items
+
+As the VP, review the project documents and identify work to be done. Check in this priority order:
+1. **Inbox items** — action items from discussions, standups, or research
+2. **Next tasks** — items listed in `docs/next-tasks.md`
+3. **Roadmap items** — unchecked items from `docs/roadmap.md`
+
+Present the work items to the user and confirm what to focus on.
+
+#### 3B.4 Execute Work
+
+Work through the confirmed items. This may include:
+- **Research:** Use web search to investigate topics, gather information, write findings
+- **Writing:** Draft documents, content, plans, proposals
+- **Planning:** Break down milestones into tasks, create timelines, identify dependencies
+- **Outreach:** Draft emails, messages, or communication materials
+- **Analysis:** Analyze data, competitors, market conditions
+- **Organization:** Organize files, update documentation, clean up project structure
+- **Any other work** relevant to the project's goals
+
+For each completed item:
+- Mark it done in the relevant document (check off in roadmap, remove from next-tasks, mark as [SEEN] in inbox)
+- Note what was accomplished
+
+#### 3B.5 Update Project Documents
+
+After the work session:
+
+1. Update `docs/status.md` with:
+   - What was completed
+   - What's in progress
+   - Updated "Last updated" date
+
+2. Update `docs/next-tasks.md` with:
+   - Remove completed items
+   - Add any new tasks discovered during the session
+
+3. Append to `docs/worklog.md`:
+   ```markdown
+   ## YYYY-MM-DD - VP work session completed
+
+   - Items completed: <list of completed items>
+   - Items remaining: <count of remaining items>
+   - New items discovered: <any new tasks added>
+   ```
+
+#### 3B.6 Report to User
+
+Display a summary:
+
+```
+Work session finished for <project-name>!
+
+  Mode: VP-guided
+  Items completed: <N>
+  Items remaining: <M>
+
+  Completed:
+  - <item 1>
+  - <item 2>
+
+  Up next:
+  - <next item 1>
+  - <next item 2>
 
 Next steps:
   - Run /tst:project-work <id> again to continue

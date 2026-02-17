@@ -1,11 +1,11 @@
 {
   "name": "tst",
-  "description": "Two Slice Team — an AI operations team for orchestrating agents across multiple projects. Co-founder personas for ideation, VP agents for project execution, and Ralph Loop for autonomous work.",
+  "description": "Two Slice Team — an AI operations team for orchestrating agents across multiple projects. Co-founder personas for ideation and research, VP agents for project execution across any work type (code, research, content, outreach, etc.), and Ralph Loop for autonomous code execution.",
   "version": "0.1.0",
   "author": {
     "name": "Joey Wang"
   },
   "repository": "https://github.com/JoeyWangTW/two-slice-team-plugin",
   "license": "MIT",
-  "keywords": ["agent-teams", "project-management", "orchestration", "ralph-loop"]
+  "keywords": ["agent-teams", "project-management", "orchestration", "ralph-loop", "research"]
 }

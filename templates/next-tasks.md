@@ -2,4 +2,4 @@
 
 ## Next Up
 
-- (no tasks yet - use `/project meeting` to plan tasks)
+- (no tasks yet - use `/tst:project-meeting` to plan tasks)
