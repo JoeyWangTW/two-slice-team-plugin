@@ -3,6 +3,7 @@
 - Empty directories need `.gitkeep` files to be tracked by git
 - plugin.json follows Claude Code plugin spec with name, description, and skills array
 - Each skill has name, description, and path to SKILL.md
+- Templates use `{{PLACEHOLDER}}` syntax (PROJECT_NAME, VISION, DATE, CONVENTIONS, ALLOWED_COMMANDS)
 
 ---
 
@@ -20,4 +21,20 @@
   - Plugin source lives in repo at `plugin/`, symlinked to `~/.claude/plugins/two-slice-team/`
   - All 6 skills declared in plugin.json: cofounder, standup, project-create, project-list, project-meeting, project-work
   - State directory holds projects.json which tracks all registered projects
+---
+
+## 2026-02-16 - US-002
+- Created all project template files in plugin/templates/
+- Files changed:
+  - plugin/templates/CLAUDE.md.template (vision, work docs, conventions, allowed commands)
+  - plugin/templates/status.md (last updated, current state, completed, in progress, up next, blockers)
+  - plugin/templates/worklog.md (header with project created entry placeholder)
+  - plugin/templates/inbox.md (instructions for [SEEN] marking, empty placeholder)
+  - plugin/templates/roadmap.md (vision, milestones, current focus)
+  - plugin/templates/next-tasks.md (prioritized tasks section, empty list)
+- **Learnings for future iterations:**
+  - Templates use `{{PLACEHOLDER}}` syntax for values that get replaced during project creation
+  - CLAUDE.md.template has placeholders: PROJECT_NAME, VISION, CONVENTIONS, ALLOWED_COMMANDS
+  - status.md and worklog.md use {{DATE}} placeholder for creation date
+  - Templates are self-contained markdown files with consistent heading structure
 ---

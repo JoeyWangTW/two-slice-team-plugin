@@ -34,8 +34,8 @@
         "All template files use consistent markdown formatting"
       ],
       "priority": 2,
-      "passes": false,
-      "notes": "These templates live in the plugin's templates/ dir and get copied + customized during /project create"
+      "passes": true,
+      "notes": "Templates created: CLAUDE.md.template, status.md, worklog.md, inbox.md, roadmap.md, next-tasks.md"
     },
     {
       "id": "US-003",
