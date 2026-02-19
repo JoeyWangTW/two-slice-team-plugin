@@ -12,7 +12,6 @@
       "name": "tst",
       "source": "./",
       "description": "Two Slice Team — co-founder agents for ideation and research, VP agents for project execution across any work type, and Ralph Loop for autonomous code execution.",
-      "version": "0.2.0",
       "author": {
         "name": "Joey Wang"
       },
