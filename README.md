@@ -87,6 +87,7 @@ This creates the HQ structure and saves the path to `~/.config/tst/config.json`:
 | `/tst:project-list status <id>` | View a project's status |
 | `/tst:project-list pause <id>` | Pause a project (hide from standups) |
 | `/tst:project-list resume <id>` | Resume a paused project |
+| `/tst:project-status <id>` | Get a comprehensive status report from a project's VP |
 | `/tst:project-meeting <id>` | Deep planning session with a project's VP |
 | `/tst:project-work <id>` | Kick off Ralph Loop for autonomous execution |
 | `/tst:cofounder` | Spawn co-founder agents for ideation |
@@ -116,6 +117,7 @@ two-slice-team-plugin/
 │   ├── standup/SKILL.md      # /tst:standup
 │   ├── project-create/SKILL.md
 │   ├── project-list/SKILL.md
+│   ├── project-status/SKILL.md
 │   ├── project-meeting/SKILL.md
 │   └── project-work/SKILL.md
 └── templates/                # Project scaffolding templates
