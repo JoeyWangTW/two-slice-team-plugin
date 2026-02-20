@@ -54,9 +54,28 @@ Create the following directories and files in the project path:
 │   └── next-tasks.md
 └── scripts/
     └── ralph/
+        ├── ralph.sh
+        ├── CLAUDE.md
+        └── prompt.md
 ```
 
-### 3. Generate CLAUDE.md
+### 3. Install Ralph Loop
+
+Fetch the Ralph Loop files from GitHub into `<project-path>/scripts/ralph/`:
+
+```bash
+curl -fsSL -o <project-path>/scripts/ralph/ralph.sh https://raw.githubusercontent.com/snarktank/ralph/main/ralph.sh
+curl -fsSL -o <project-path>/scripts/ralph/CLAUDE.md https://raw.githubusercontent.com/snarktank/ralph/main/CLAUDE.md
+curl -fsSL -o <project-path>/scripts/ralph/prompt.md https://raw.githubusercontent.com/snarktank/ralph/main/prompt.md
+chmod +x <project-path>/scripts/ralph/ralph.sh
+```
+
+If either download fails, warn the user but continue with project creation:
+```
+Warning: Could not download Ralph Loop files. You can install them manually later from https://github.com/snarktank/ralph
+```
+
+### 4. Generate CLAUDE.md
 
 Create `CLAUDE.md` in the project root with this content (replace `{{PROJECT_NAME}}` with the actual project name):
 
@@ -91,7 +110,7 @@ Create `CLAUDE.md` in the project root with this content (replace `{{PROJECT_NAM
 (No custom commands yet)
 ```
 
-### 4. Generate docs/ Files
+### 5. Generate docs/ Files
 
 Create the following files in the `docs/` directory:
 
@@ -172,7 +191,7 @@ Mark items as `[SEEN]` after reading them.
 - (no tasks yet - use `/tst:project-meeting` to plan tasks)
 ```
 
-### 5. Generate Configuration Files
+### 6. Generate Configuration Files
 
 **prd.json** (empty PRD ready for stories):
 ```json
@@ -198,7 +217,7 @@ Mark items as `[SEEN]` after reading them.
 }
 ```
 
-### 6. Generate VP Name
+### 7. Generate VP Name
 
 Generate a VP name for this project. Use a creative, memorable name that relates to the project domain. Examples:
 - For a search project: "VP Sierra Search"
@@ -209,7 +228,7 @@ Generate a VP name for this project. Use a creative, memorable name that relates
 
 Format: "VP [First Name] [Domain Word]"
 
-### 7. Register in projects.json
+### 8. Register in projects.json
 
 Read `{{HQ_PATH}}/state/projects.json` and add a new entry:
 
@@ -227,7 +246,7 @@ Read `{{HQ_PATH}}/state/projects.json` and add a new entry:
 
 Write the updated projects.json back to disk.
 
-### 8. Confirm to User
+### 9. Confirm to User
 
 After completing all steps, display a summary:
 

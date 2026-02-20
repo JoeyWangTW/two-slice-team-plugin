@@ -89,7 +89,7 @@ This creates the HQ structure and saves the path to `~/.config/tst/config.json`:
 | `/tst:project-list resume <id>` | Resume a paused project |
 | `/tst:project-status <id>` | Get a comprehensive status report from a project's VP |
 | `/tst:project-meeting <id>` | Deep planning session with a project's VP |
-| `/tst:project-work <id>` | Kick off Ralph Loop for autonomous execution |
+| `/tst:project-work <id>` | Launch Ralph Loop in a new terminal for a project |
 | `/tst:cofounder` | Spawn co-founder agents for ideation |
 | `/tst:cofounder-research <topic>` | Research a topic asynchronously |
 | `/tst:standup` | Run a standup across all active projects |
@@ -100,7 +100,7 @@ This creates the HQ structure and saves the path to `~/.config/tst/config.json`:
 2. **Brainstorm** — `/tst:cofounder` to discuss an idea with your co-founders
 3. **Create a project** — `/tst:project-create my-app`
 4. **Plan it** — `/tst:project-meeting my-app` to define vision and user stories with the VP
-5. **Execute** — `/tst:project-work my-app` to kick off autonomous execution (Ralph Loop for code, VP-guided for other work)
+5. **Execute** — `/tst:project-work my-app` to launch Ralph Loop in a new terminal for autonomous execution
 6. **Check in** — `/tst:standup` to get status reports from all VPs
 
 ## Plugin Structure
