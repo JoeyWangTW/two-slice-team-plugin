@@ -70,12 +70,15 @@ This creates the HQ structure and saves the path to `~/.config/tst/config.json`:
 
 ```
 ~/my-hq/
+├── CLAUDE.md                 # HQ operating guide — keeps sessions focused on management
 ├── state/projects.json       # Project registry
 ├── discussions/              # Co-founder session notes
 ├── standups/                 # Daily standup summaries
 ├── meetings/                 # Project meeting notes
 └── research/                 # Co-founder research results
 ```
+
+The `CLAUDE.md` is key — it tells Claude that HQ is for managing projects (vision, planning, check-ins, delegation), not for doing the actual work. It lists all available commands and defines how the human-agent handoff should work.
 
 ## Commands
 

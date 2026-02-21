@@ -30,6 +30,7 @@ Create the following directories and files at the HQ path:
 
 ```
 <hq-path>/
+├── CLAUDE.md
 ├── state/
 │   └── projects.json
 ├── discussions/
@@ -47,7 +48,19 @@ Create the following directories and files at the HQ path:
 
 Create the `discussions/`, `standups/`, `meetings/`, and `research/` directories (they start empty).
 
-### 3. Write Config
+### 3. Create HQ CLAUDE.md
+
+Check if `<hq-path>/CLAUDE.md` already exists.
+
+**If it does NOT exist:** Read the plugin's own `CLAUDE.md` (located at the root of the two-slice-team-plugin directory) and use it as the template to create `<hq-path>/CLAUDE.md`. This file defines how HQ sessions should work — managing projects, not working on them.
+
+**If it ALREADY exists:** Do not overwrite it. Instead, note to the user:
+```
+CLAUDE.md already exists — skipping. See the plugin's CLAUDE.md for the latest HQ reference:
+  https://github.com/JoeyWangTW/two-slice-team-plugin/blob/main/CLAUDE.md
+```
+
+### 4. Write Config
 
 Write `~/.config/tst/config.json` with the HQ path:
 
@@ -63,7 +76,7 @@ If the file already exists, read it first and confirm with the user before overw
 - Show the current `hq_path` value
 - Ask: "HQ is currently set to `<old-path>`. Update to `<new-path>`?"
 
-### 4. Confirm to User
+### 5. Confirm to User
 
 Display:
 
@@ -74,6 +87,7 @@ Two Slice Team HQ initialized!
   Config:  ~/.config/tst/config.json
 
   Created:
+    - CLAUDE.md (HQ operating guide)
     - state/projects.json
     - discussions/
     - standups/
