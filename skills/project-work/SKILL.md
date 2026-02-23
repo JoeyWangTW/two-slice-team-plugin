@@ -52,6 +52,8 @@ Change into the project directory and check the following:
   curl -fsSL -o <project-path>/scripts/ralph/CLAUDE.md https://raw.githubusercontent.com/snarktank/ralph/main/CLAUDE.md
   curl -fsSL -o <project-path>/scripts/ralph/prompt.md https://raw.githubusercontent.com/snarktank/ralph/main/prompt.md
   chmod +x <project-path>/scripts/ralph/ralph.sh
+  ln -sf ../../prd.json <project-path>/scripts/ralph/prd.json
+  ln -sf ../../progress.txt <project-path>/scripts/ralph/progress.txt
   ```
 - If download fails, display:
   ```

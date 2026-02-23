@@ -56,7 +56,9 @@ Create the following directories and files in the project path:
     └── ralph/
         ├── ralph.sh
         ├── CLAUDE.md
-        └── prompt.md
+        ├── prompt.md
+        ├── prd.json -> ../../prd.json          (symlink)
+        └── progress.txt -> ../../progress.txt  (symlink)
 ```
 
 ### 3. Install Ralph Loop
@@ -70,7 +72,14 @@ curl -fsSL -o <project-path>/scripts/ralph/prompt.md https://raw.githubuserconte
 chmod +x <project-path>/scripts/ralph/ralph.sh
 ```
 
-If either download fails, warn the user but continue with project creation:
+Then create symlinks so ralph.sh can find `prd.json` and `progress.txt` (it looks in its own directory):
+
+```bash
+ln -sf ../../prd.json <project-path>/scripts/ralph/prd.json
+ln -sf ../../progress.txt <project-path>/scripts/ralph/progress.txt
+```
+
+If any download fails, warn the user but continue with project creation:
 ```
 Warning: Could not download Ralph Loop files. You can install them manually later from https://github.com/snarktank/ralph
 ```
