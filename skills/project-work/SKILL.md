@@ -108,7 +108,14 @@ osascript -e 'tell application "Terminal" to do script "cd <project-path> && scr
 
 **iTerm2:**
 ```bash
-osascript -e 'tell application "iTerm2" to create window with default profile command "cd <project-path> && scripts/ralph/ralph.sh --tool claude"'
+osascript <<'APPLESCRIPT'
+tell application "iTerm2"
+  set newWindow to (create window with default profile)
+  tell current session of newWindow
+    write text "cd <project-path> && scripts/ralph/ralph.sh --tool claude"
+  end tell
+end tell
+APPLESCRIPT
 ```
 
 **Warp:**
