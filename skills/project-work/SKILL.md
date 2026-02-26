@@ -96,16 +96,16 @@ Append an entry to `<project-path>/docs/worklog.md`:
 
 ### 5. Launch Ralph Loop in New Terminal
 
-Build the Ralph command:
+Build the Ralph command (note: the debrief script runs after Ralph finishes to auto-update `docs/status.md`):
 ```bash
-cd <project-path> && scripts/ralph/ralph.sh --tool claude
+cd <project-path> && scripts/ralph/ralph.sh --tool claude; scripts/post-ralph-debrief.sh
 ```
 
 Open a new terminal window using the configured terminal app:
 
 **Terminal.app:**
 ```bash
-osascript -e 'tell application "Terminal" to do script "cd <project-path> && scripts/ralph/ralph.sh --tool claude"'
+osascript -e 'tell application "Terminal" to do script "cd <project-path> && scripts/ralph/ralph.sh --tool claude; scripts/post-ralph-debrief.sh"'
 ```
 
 **iTerm2:**
@@ -114,7 +114,7 @@ osascript <<'APPLESCRIPT'
 tell application "iTerm2"
   set newWindow to (create window with default profile)
   tell current session of newWindow
-    write text "cd <project-path> && scripts/ralph/ralph.sh --tool claude"
+    write text "cd <project-path> && scripts/ralph/ralph.sh --tool claude; scripts/post-ralph-debrief.sh"
   end tell
 end tell
 APPLESCRIPT
@@ -125,7 +125,7 @@ APPLESCRIPT
 osascript -e 'tell application "Warp" to activate'
 osascript -e 'tell application "System Events" to tell process "Warp" to keystroke "t" using command down'
 sleep 1
-osascript -e 'tell application "System Events" to tell process "Warp" to keystroke "cd <project-path> && scripts/ralph/ralph.sh --tool claude"'
+osascript -e 'tell application "System Events" to tell process "Warp" to keystroke "cd <project-path> && scripts/ralph/ralph.sh --tool claude; scripts/post-ralph-debrief.sh"'
 osascript -e 'tell application "System Events" to tell process "Warp" to key code 36'
 ```
 

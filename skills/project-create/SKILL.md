@@ -53,6 +53,7 @@ Create the following directories and files in the project path:
 │   ├── roadmap.md
 │   └── next-tasks.md
 └── scripts/
+    ├── post-ralph-debrief.sh              (auto-updates status after Ralph)
     └── ralph/
         ├── ralph.sh
         ├── CLAUDE.md
@@ -78,6 +79,19 @@ Then create symlinks so ralph.sh can find `prd.json` and `progress.txt` (it look
 ln -sf ../../prd.json <project-path>/scripts/ralph/prd.json
 ln -sf ../../progress.txt <project-path>/scripts/ralph/progress.txt
 ```
+
+### 3b. Install Post-Ralph Debrief Script
+
+Copy the debrief script from the plugin into the project so it auto-updates `docs/status.md` after every Ralph Loop:
+
+```bash
+cp <plugin-path>/scripts/post-ralph-debrief.sh <project-path>/scripts/post-ralph-debrief.sh
+chmod +x <project-path>/scripts/post-ralph-debrief.sh
+```
+
+Where `<plugin-path>` is the directory containing this skill (the Two Slice Team plugin root). You can find it by looking at the path of this SKILL.md file and going up two levels (from `skills/project-create/SKILL.md` to the plugin root).
+
+If the source file doesn't exist, warn but continue — it's not critical for project creation.
 
 If any download fails, warn the user but continue with project creation:
 ```
