@@ -34,6 +34,7 @@ Create the following directories and files at the HQ path:
 ├── state/
 │   └── projects.json
 ├── discussions/
+├── ideas/
 ├── standups/
 ├── meetings/
 └── research/
@@ -46,7 +47,9 @@ Create the following directories and files at the HQ path:
 }
 ```
 
-Create the `discussions/`, `standups/`, `meetings/`, and `research/` directories (they start empty).
+Create the `discussions/`, `ideas/`, `standups/`, `meetings/`, and `research/` directories (they start empty).
+
+The `ideas/` folder is a dumping ground for anything — random notes, brainstorm documents, meeting notes, links, half-baked concepts. Things that might become projects someday but aren't structured yet.
 
 ### 3. Create HQ CLAUDE.md
 
@@ -90,6 +93,7 @@ Two Slice Team HQ initialized!
     - CLAUDE.md (HQ operating guide)
     - state/projects.json
     - discussions/
+    - ideas/          (dump random notes, brainstorms, meeting notes here)
     - standups/
     - meetings/
     - research/

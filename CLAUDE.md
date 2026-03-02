@@ -24,7 +24,7 @@ Everything in this directory is about coordination, not execution. If a task req
 - Deep research (use `/tst:cofounder-research` which saves to HQ, or delegate to a project)
 - Debugging or troubleshooting project issues
 - Any task that should happen inside a project directory
-- File creation beyond HQ management files (discussions, standups, meetings, research)
+- File creation beyond HQ management files (discussions, standups, meetings, research, ideas)
 
 ## Human-Agent Collaboration
 
