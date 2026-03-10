@@ -92,3 +92,11 @@ A typical HQ session should follow this pattern:
 5. **Think ahead** — `/tst:cofounder` for strategy, `/tst:cofounder-research` for research
 
 Do not let sessions drift into doing project work. If you catch yourself about to write code or do deep implementation work, stop and delegate instead.
+
+## Versioning
+
+When pushing changes to the plugin, **always bump the version** in `.claude-plugin/plugin.json` before committing. This is how consumers detect updates.
+
+- Version lives in `.claude-plugin/plugin.json` → `"version"` field
+- Use semver: patch for fixes/tweaks, minor for new features, major for breaking changes
+- Bump the version in the same commit as the changes (not a separate commit)
