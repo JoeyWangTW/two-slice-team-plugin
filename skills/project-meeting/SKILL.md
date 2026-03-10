@@ -67,6 +67,17 @@ Change into the project directory ({{PROJECT_PATH}}) and read:
 - `docs/roadmap.md` (current roadmap)
 - `docs/inbox.md` (pending items)
 
+Then run a **staleness check**:
+- Extract the "Last updated" date from `docs/status.md`
+- Run `git log -1 --format='%ci'` in the project directory to get the latest commit date
+- Run `git status --short` to check for uncommitted changes
+- **Stale if ANY of these are true:**
+  - Latest commit is newer than the status update date (by more than ~1 day)
+  - There are uncommitted changes in the working tree (especially to source files, docs, prd.json, progress.txt)
+- If stale from commits: flag "⚠️ Status docs appear stale — last updated <date> but commits exist from <commit date>." and run `git log --oneline --since="<status-last-updated-date>"` to understand what changed
+- If stale from uncommitted changes: flag "⚠️ Uncommitted work detected — <N> files modified since last commit." and run `git diff --stat` to summarize
+- Use git history and uncommitted changes to supplement the docs during the planning discussion
+
 ### 2. Planning Discussion
 Lead a structured planning conversation with the user covering:
 
